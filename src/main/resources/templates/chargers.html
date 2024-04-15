@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chargers</title>
+</head>
+<body>
+<h1>Chargers List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Station Charger ID</th>
+        <th>Address</th>
+        <th>Apt Code</th>
+        <th>Charger Type</th>
+        <th>Kind Detail</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Name</th>
+        <th>Operator ID</th>
+        <th>Operator Name</th>
+        <th>Output</th>
+        <th>Updated At</th>
+        <th>Zs Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="charger : ${chargers}">
+        <td th:text="${charger.stationChargerId}"></td>
+        <td th:text="${charger.address}"></td>
+        <td th:text="${charger.aptCode}"></td>
+        <td th:text="${charger.chargerType}"></td>
+        <td th:text="${charger.kindDetail}"></td>
+        <td th:text="${charger.lat}"></td>
+        <td th:text="${charger.lng}"></td>
+        <td th:text="${charger.name}"></td>
+        <td th:text="${charger.operatorId}"></td>
+        <td th:text="${charger.operatorName}"></td>
+        <td th:text="${charger.output}"></td>
+        <td th:text="${charger.updatedAt}"></td>
+        <td th:text="${charger.zscode}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
