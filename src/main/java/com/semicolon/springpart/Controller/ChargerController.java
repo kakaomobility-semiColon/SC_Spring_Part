@@ -23,6 +23,6 @@ public class ChargerController {
     public String getAllChargers(Model model) {
         List<ChargerApiEntity> chargers = chargerService.getAllChargers();
         model.addAttribute("chargers", chargers);
-        return "chargers"; // 템플릿 파일의 이름
+        return "chargers";
     }
 }
