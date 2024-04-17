@@ -3,45 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chargers</title>
+    <title>Charger Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-<h1>Chargers List</h1>
-<table border="1">
+
+<h2>Charger Table</h2>
+
+<table>
     <thead>
     <tr>
         <th>Station Charger ID</th>
-        <th>Address</th>
-        <th>Apt Code</th>
+        <th>Name</th>
         <th>Charger Type</th>
-        <th>Kind Detail</th>
+        <th>Address</th>
         <th>Latitude</th>
         <th>Longitude</th>
-        <th>Name</th>
         <th>Operator ID</th>
         <th>Operator Name</th>
         <th>Output</th>
+        <th>ZS Code</th>
+        <th>Kind Detail</th>
         <th>Updated At</th>
-        <th>Zs Code</th>
+        <th>Apt Code</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="charger : ${chargers}">
-        <td th:text="${charger.stationChargerId}"></td>
-        <td th:text="${charger.address}"></td>
-        <td th:text="${charger.aptCode}"></td>
-        <td th:text="${charger.chargerType}"></td>
-        <td th:text="${charger.kindDetail}"></td>
-        <td th:text="${charger.lat}"></td>
-        <td th:text="${charger.lng}"></td>
-        <td th:text="${charger.name}"></td>
-        <td th:text="${charger.operatorId}"></td>
-        <td th:text="${charger.operatorName}"></td>
-        <td th:text="${charger.output}"></td>
-        <td th:text="${charger.updatedAt}"></td>
-        <td th:text="${charger.zscode}"></td>
+        <td th:text="${charger?.stationChargerId}"></td>
+        <td th:text="${charger?.name}"></td>
+        <td th:text="${charger?.chargerType}"></td>
+        <td th:text="${charger?.address}"></td>
+        <td th:text="${charger?.lat}"></td>
+        <td th:text="${charger?.lng}"></td>
+        <td th:text="${charger?.operatorId}"></td>
+        <td th:text="${charger?.operatorName}"></td>
+        <td th:text="${charger?.output}"></td>
+        <td th:text="${charger?.zscode}"></td>
+        <td th:text="${charger?.kindDetail}"></td>
+        <td th:text="${charger?.updatedAt}"></td>
+        <td th:text="${charger?.aptCode}"></td>
     </tr>
     </tbody>
 </table>
+
+<div>
+    <ul class="pagination" style="list-style: none; display: flex;">
+        <li th:if="${currentPage > 0}">
+            <a th:href="@{/chargers(page=0)}" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; background-color: #f2f2f2; text-decoration: none;">First</a>
+        </li>
+        <li th:if="${currentPage > 0}">
+            <a th:href="@{/chargers(page=${currentPage - 1})}" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; background-color: #f2f2f2; text-decoration: none;">Previous</a>
+        </li>
+        <li th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == pageItem}? 'active'">
+            <span th:if="${pageItem < currentPage + 10 and pageItem >= currentPage - 10}">
+                <a th:href="@{/chargers(page=${pageItem})}" th:text="${pageItem + 1}" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; background-color: #f2f2f2; text-decoration: none;"></a>
+            </span>
+        </li>
+        <li th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/chargers(page=${currentPage + 1})}" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; background-color: #f2f2f2; text-decoration: none;">Next</a>
+        </li>
+        <li th:if="${currentPage < totalPages - 1}">
+            <a th:href="@{/chargers(page=${totalPages - 1})}" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; background-color: #f2f2f2; text-decoration: none;">Last</a>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>
