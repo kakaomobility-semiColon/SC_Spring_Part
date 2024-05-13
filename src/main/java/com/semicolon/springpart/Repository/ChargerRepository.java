@@ -12,6 +12,14 @@ import java.util.List;
 
 @Repository
 public interface ChargerRepository extends JpaRepository<ChargerApiEntity, Long> {
+
+
+
+    @Query("SELECT c FROM ChargerApiEntity c WHERE c.name LIKE %:keyword% OR c.address LIKE %:keyword%")
+    List<ChargerApiEntity> searchChargersByNameOrAddress(@Param("keyword") String keyword);
+
+    List<ChargerApiEntity> findByNameContainingIgnoreCase(String name); // 대소문자 구분X, 부분적으로 일치하는 모든 이름 검색 쿼리
+
     @Query("SELECT c FROM ChargerApiEntity c WHERE c.lat BETWEEN :swLat AND :neLat AND c.lng BETWEEN :swLng AND :neLng")
     List<ChargerApiEntity> findByLocationWithin(@Param("swLat") float swLat,
                                                 @Param("swLng") float swLng,
