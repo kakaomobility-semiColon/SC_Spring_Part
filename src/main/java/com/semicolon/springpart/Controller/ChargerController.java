@@ -1,42 +1,39 @@
 package com.semicolon.springpart.Controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.ui.Model;
 import com.semicolon.springpart.Service.ChargerService;
 import com.semicolon.springpart.entity.ChargerApiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/charger")
 public class ChargerController {
 
     private final ChargerService chargerService;
-
 
     @Autowired
     public ChargerController(ChargerService chargerService) {
         this.chargerService = chargerService;
     }
 
-    @GetMapping("/chargers")
-    public String getChargersPage(@RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(defaultValue = "10") int size,
-                                  Model model) {
-        // PageRequest.of(page, size)를 사용하여 페이지 번호와 크기를 설정
-        Page<ChargerApiEntity> chargersPage = chargerService.getAllChargersPageable(PageRequest.of(page, size));
+    @GetMapping("/search")
+    public List<ChargerApiEntity> searchChargersNearby(@RequestParam float swLat,
+                                                       @RequestParam float swLng,
+                                                       @RequestParam float neLat,
+                                                       @RequestParam float neLng) {
+        return chargerService.searchChargersInArea(swLat, swLng, neLat, neLng);
+    }
 
-        // 현재 페이지의 ChargerApiEntity 목록을 모델에 추가
-        model.addAttribute("chargers", chargersPage.getContent());
-
-        // 페이징 관련 정보를 모델에 추가
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", chargersPage.getTotalPages());
-        model.addAttribute("totalItems", chargersPage.getTotalElements());
-
-        return "chargers";
+    @GetMapping("/{chargerId}/detail")
+    public ChargerApiEntity getChargerDetail(@PathVariable String chargerId) {
+        return chargerService.getChargerDetailById(chargerId);
     }
 }
