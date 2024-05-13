@@ -23,6 +23,10 @@ public class ChargerService {
     public List<ChargerApiEntity> getAllChargers() {
         return chargerRepository.findAll();
     }
+    public List<ChargerApiEntity> searchChargersByNameOrAddress(String keyword) {
+        //이름이나 주소로 충전기 조회
+        return chargerRepository.searchChargersByNameOrAddress(keyword);
+    }
     public List<ChargerApiEntity> searchChargersInArea(float swLat, float swLng, float neLat, float neLng) {
         // 북동쪽, 남서쪽 좌표를 기준으로 주변의 충전기 조회
         return chargerRepository.findByLocationWithin(swLat, swLng, neLat, neLng);
