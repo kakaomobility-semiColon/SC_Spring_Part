@@ -2,6 +2,7 @@ package com.semicolon.springpart.Service;
 
 import com.semicolon.springpart.Repository.ChargerRepository;
 import com.semicolon.springpart.entity.ChargerApiEntity;
+import com.semicolon.springpart.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,8 @@ public class ChargerService {
     }
 
         // id 기준 상세 정보 조회
-    public ChargerApiEntity getChargerDetailById(String stationChargerId) {
-        return chargerRepository.findByStationChargerId(stationChargerId);
+    public ChargerApiEntity getChargerDetailById(String encryptedId) {
+        String decryptedId = AESUtil.decrypt(encryptedId); // 암호화된 ID를 복호화
+        return chargerRepository.findByStationChargerId(decryptedId);
     }
 }
