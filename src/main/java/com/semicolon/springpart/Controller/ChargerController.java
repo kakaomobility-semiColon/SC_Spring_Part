@@ -2,6 +2,7 @@ package com.semicolon.springpart.Controller;
 
 import com.semicolon.springpart.Service.ChargerService;
 import com.semicolon.springpart.entity.ChargerApiEntity;
+import com.semicolon.springpart.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,7 +45,8 @@ public class ChargerController {
 
     @GetMapping("/{chargerId}/detail")
     public ResponseEntity<Map<String, Object>> getChargerDetail(@PathVariable String chargerId) {
-        ChargerApiEntity charger = chargerService.getChargerDetailById(chargerId);
+        String encryptedId = AESUtil.encrypt(chargerId); // ID를 암호화
+        ChargerApiEntity charger = chargerService.getChargerDetailById(encryptedId);
         return createResponse(charger);
     }
 
