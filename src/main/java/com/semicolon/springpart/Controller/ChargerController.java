@@ -1,13 +1,11 @@
 package com.semicolon.springpart.Controller;
 
+import com.semicolon.springpart.Service.BookmarkService;
 import com.semicolon.springpart.Service.ChargerService;
+import com.semicolon.springpart.entity.BookmarkEntity;
 import com.semicolon.springpart.entity.ChargerApiEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,9 +21,29 @@ import java.util.Map;
 public class ChargerController {
 
     private final ChargerService chargerService;
+    private final BookmarkService bookmarkService;
 
-    public ChargerController(ChargerService chargerService) {
+    public ChargerController(ChargerService chargerService, BookmarkService bookmarkService) {
         this.chargerService = chargerService;
+        this.bookmarkService = bookmarkService;
+    }
+
+    @PostMapping("/{chargerId}/bookmark")
+    public ResponseEntity<Map<String, Object>> addBookmark(@RequestParam String userId, @PathVariable String chargerId) {
+        BookmarkEntity bookmark = bookmarkService.addBookmark(userId, chargerId);
+        return createResponse(bookmark);
+    }
+
+    @GetMapping("/bookmarks")
+    public ResponseEntity<Map<String, Object>> getBookmarks(@RequestParam String userId) {
+        List<BookmarkEntity> bookmarks = bookmarkService.getBookmarksByUserId(userId);
+        return createResponse(bookmarks);
+    }
+
+    @DeleteMapping("/{chargerId}/bookmark")
+    public ResponseEntity<Map<String, Object>> removeBookmark(@RequestParam String userId, @PathVariable String chargerId) {
+        bookmarkService.removeBookmark(userId, chargerId);
+        return createResponse(null);
     }
 
     @GetMapping("/search")
@@ -57,4 +75,6 @@ public class ChargerController {
         response.put("success", true);
         return ResponseEntity.ok().body(response);
     }
+
+
 }

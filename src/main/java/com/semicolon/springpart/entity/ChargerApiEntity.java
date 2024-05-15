@@ -48,6 +48,7 @@ public class ChargerApiEntity {
     @Column(name = "apt_code")
     private String aptCode;
 
+
     // Getters and setters
 
     public String getStationChargerId() {
@@ -154,3 +155,4 @@ public class ChargerApiEntity {
         this.aptCode = aptCode;
     }
 }
+
