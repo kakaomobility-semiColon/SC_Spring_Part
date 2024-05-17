@@ -17,6 +17,8 @@ import java.util.List;
 public interface ChargerRepository extends JpaRepository<ChargerApiEntity, Long> {
 
 
+    @Query("SELECT new com.semicolon.springpart.dto.ChargerMarkerDTO(c.name, c.lat, c.lng, c.address) FROM ChargerApiEntity c")
+    List<ChargerMarkerDTO> findAllChargerMarkers();
 
     @Query("SELECT new com.semicolon.springpart.dto.ChargerSearchDTO(c.name, c.chargerType, c.address, c.operatorName, c.output, c.kindDetail) FROM ChargerApiEntity c WHERE c.name LIKE %:keyword% OR c.address LIKE %:keyword%")
     List<ChargerSearchDTO> searchChargersByNameOrAddress(@Param("keyword") String keyword);

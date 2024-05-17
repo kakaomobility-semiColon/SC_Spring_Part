@@ -50,6 +50,13 @@ public class ChargerController {
         return createResponse(detail);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<Map<String, Object>> getAllChargers() {
+        List<ChargerMarkerDTO> all = chargerService.getAllChargers();
+        return createResponse(all);
+    }
+
+
     private ResponseEntity<Map<String, Object>> createResponse(Object data) {
         Map<String, Object> response = new HashMap<>();
         response.put("timeStamp", LocalDateTime.now());

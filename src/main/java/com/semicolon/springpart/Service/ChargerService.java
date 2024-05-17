@@ -1,5 +1,6 @@
 package com.semicolon.springpart.Service;
 
+
 import com.semicolon.springpart.Repository.ChargerRepository;
 import com.semicolon.springpart.dto.ChargerDetailDTO;
 import com.semicolon.springpart.dto.ChargerMarkerDTO;
@@ -39,5 +40,10 @@ public class ChargerService {
     // id 기준 상세 정보 조회
     public ChargerDetailDTO getChargerDetailById(String stationChargerId) {
         return chargerRepository.findByStationChargerId(stationChargerId);
+    }
+
+    public List<ChargerMarkerDTO> getAllChargers() {
+        List<ChargerMarkerDTO> all = chargerRepository.findAllChargerMarkers();
+        return all;
     }
 }
