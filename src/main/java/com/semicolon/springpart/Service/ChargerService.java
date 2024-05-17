@@ -40,8 +40,4 @@ public class ChargerService {
     public ChargerDetailDTO getChargerDetailById(String stationChargerId) {
         return chargerRepository.findByStationChargerId(stationChargerId);
     }
-    public List<ChargerApiEntity> searchChargersByNameOrAddress(String keyword) {
-        //이름이나 주소로 충전기 조회
-        return chargerRepository.searchChargersByNameOrAddress(keyword);
-    }
 }
