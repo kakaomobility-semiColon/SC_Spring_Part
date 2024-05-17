@@ -1,13 +1,14 @@
 package com.semicolon.springpart.Controller;
 
+import com.semicolon.springpart.Service.BookmarkService;
 import com.semicolon.springpart.Service.ChargerService;
+import com.semicolon.springpart.dto.ChargerDetailDTO;
+import com.semicolon.springpart.dto.ChargerMarkerDTO;
+import com.semicolon.springpart.dto.ChargerSearchDTO;
+import com.semicolon.springpart.entity.BookmarkEntity;
 import com.semicolon.springpart.entity.ChargerApiEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,28 +25,29 @@ public class ChargerController {
 
     private final ChargerService chargerService;
 
-    public ChargerController(ChargerService chargerService) {
+
+    public ChargerController(ChargerService chargerService, BookmarkService bookmarkService) {
         this.chargerService = chargerService;
     }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> searchChargersByNameOrAddress(
             @RequestParam(value = "keyword") String keyword) {
-        List<ChargerApiEntity> charger = chargerService.searchChargersByNameOrAddress(keyword);
-        return createResponse(charger);
+        List<ChargerSearchDTO> chargers = chargerService.searchChargersDTOByNameOrAddress(keyword);
+        return createResponse(chargers);
     }
 
     @GetMapping("/search/marker")
     public ResponseEntity<Map<String, Object>> searchChargersNearby(@RequestParam float swLat, @RequestParam float swLng,
                                                                     @RequestParam float neLat, @RequestParam float neLng) {
-        List<ChargerApiEntity> charger = chargerService.searchChargersInArea(swLat, swLng, neLat, neLng);
+        List<ChargerMarkerDTO> charger = chargerService.searchChargersInArea(swLat, swLng, neLat, neLng);
         return createResponse(charger);
     }
 
     @GetMapping("/{chargerId}/detail")
     public ResponseEntity<Map<String, Object>> getChargerDetail(@PathVariable String chargerId) {
-        ChargerApiEntity charger = chargerService.getChargerDetailById(chargerId);
-        return createResponse(charger);
+        ChargerDetailDTO detail = chargerService.getChargerDetailById(chargerId);
+        return createResponse(detail);
     }
 
     private ResponseEntity<Map<String, Object>> createResponse(Object data) {
@@ -57,4 +59,6 @@ public class ChargerController {
         response.put("success", true);
         return ResponseEntity.ok().body(response);
     }
+
+
 }

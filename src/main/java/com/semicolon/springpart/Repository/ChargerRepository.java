@@ -1,5 +1,8 @@
 package com.semicolon.springpart.Repository;
 
+import com.semicolon.springpart.dto.ChargerDetailDTO;
+import com.semicolon.springpart.dto.ChargerMarkerDTO;
+import com.semicolon.springpart.dto.ChargerSearchDTO;
 import com.semicolon.springpart.entity.ChargerApiEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,16 +18,15 @@ public interface ChargerRepository extends JpaRepository<ChargerApiEntity, Long>
 
 
 
-    @Query("SELECT c FROM ChargerApiEntity c WHERE c.name LIKE %:keyword% OR c.address LIKE %:keyword%")
-    List<ChargerApiEntity> searchChargersByNameOrAddress(@Param("keyword") String keyword);
+    @Query("SELECT new com.semicolon.springpart.dto.ChargerSearchDTO(c.name, c.chargerType, c.address, c.operatorName, c.output, c.kindDetail) FROM ChargerApiEntity c WHERE c.name LIKE %:keyword% OR c.address LIKE %:keyword%")
+    List<ChargerSearchDTO> searchChargersByNameOrAddress(@Param("keyword") String keyword);
 
-    List<ChargerApiEntity> findByNameContainingIgnoreCase(String name); // 대소문자 구분X, 부분적으로 일치하는 모든 이름 검색 쿼리
+    @Query("SELECT new com.semicolon.springpart.dto.ChargerMarkerDTO(c.name, c.lat, c.lng, c.address) FROM ChargerApiEntity c WHERE c.lat BETWEEN :swLat AND :neLat AND c.lng BETWEEN :swLng AND :neLng")
+    List<ChargerMarkerDTO> findByLocationWithin(@Param("swLat") float swLat,
+                                                      @Param("swLng") float swLng,
+                                                      @Param("neLat") float neLat,
+                                                      @Param("neLng") float neLng);
 
-    @Query("SELECT c FROM ChargerApiEntity c WHERE c.lat BETWEEN :swLat AND :neLat AND c.lng BETWEEN :swLng AND :neLng")
-    List<ChargerApiEntity> findByLocationWithin(@Param("swLat") float swLat,
-                                                @Param("swLng") float swLng,
-                                                @Param("neLat") float neLat,
-                                                @Param("neLng") float neLng);
-    @Query("SELECT c FROM ChargerApiEntity c WHERE c.stationChargerId = :stationChargerId")
-    ChargerApiEntity findByStationChargerId(@Param("stationChargerId") String stationChargerId);
+    @Query("SELECT new com.semicolon.springpart.dto.ChargerDetailDTO(c.stationChargerId, c.name, c.chargerType, c.address, c.lat, c.lng, c.operatorId, c.operatorName, c.output, c.kindDetail, c.updatedAt) FROM ChargerApiEntity c WHERE c.stationChargerId = :stationChargerId")
+    ChargerDetailDTO findByStationChargerId(@Param("stationChargerId") String stationChargerId);
 }
