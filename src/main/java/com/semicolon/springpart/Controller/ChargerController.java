@@ -57,6 +57,7 @@ public class ChargerController {
     }
 
 
+
     private ResponseEntity<Map<String, Object>> createResponse(Object data) {
         Map<String, Object> response = new HashMap<>();
         response.put("timeStamp", LocalDateTime.now());
