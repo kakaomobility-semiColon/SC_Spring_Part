@@ -30,6 +30,7 @@ public class ChargerController {
         this.chargerService = chargerService;
     }
 
+    @CrossOrigin("*")
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> searchChargersByNameOrAddress(
             @RequestParam(value = "keyword") String keyword) {
@@ -37,6 +38,7 @@ public class ChargerController {
         return createResponse(chargers);
     }
 
+    @CrossOrigin("*")
     @GetMapping("/search/marker")
     public ResponseEntity<Map<String, Object>> searchChargersNearby(@RequestParam float swLat, @RequestParam float swLng,
                                                                     @RequestParam float neLat, @RequestParam float neLng) {
@@ -44,12 +46,14 @@ public class ChargerController {
         return createResponse(charger);
     }
 
+    @CrossOrigin("*")
     @GetMapping("/{chargerId}/detail")
     public ResponseEntity<Map<String, Object>> getChargerDetail(@PathVariable String chargerId) {
         ChargerDetailDTO detail = chargerService.getChargerDetailById(chargerId);
         return createResponse(detail);
     }
 
+    @CrossOrigin("*")
     @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllChargers() {
         List<ChargerMarkerDTO> all = chargerService.getAllChargers();
