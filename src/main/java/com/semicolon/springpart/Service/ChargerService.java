@@ -54,15 +54,9 @@ public class ChargerService {
     }
 
     // id 기준 상세 정보 조회
+    // id 기준 상세 정보 조회
     public ChargerDetailDTO getChargerDetailById(String stationChargerId) {
-        ChargerDetailDTO detail = chargerRepository.findByStationChargerId(stationChargerId);
-        try {
-            String encryptedId = AESUtil.encrypt(detail.getStationChargerId());
-            detail.setStationChargerId(encryptedId);  // 암호화된 ID로 설정
-        } catch (Exception e) {
-            e.printStackTrace();  // 예외 처리는 실제 상황에 맞게 조정하세요.
-        }
-        return detail;
+        return chargerRepository.findByStationChargerId(stationChargerId);
     }
 
     public List<ChargerMarkerDTO> getAllChargers() {
