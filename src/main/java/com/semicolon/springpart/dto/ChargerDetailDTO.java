@@ -3,17 +3,18 @@ package com.semicolon.springpart.dto;
 import java.sql.Date;
 
 public class ChargerDetailDTO {
-    private final String stationChargerId;
-    private final String name;
-    private final String chargerType;
-    private final String address;
-    private final Float lat;
-    private final Float lng;
-    private final String operatorId;
-    private final String operatorName;
-    private final Integer output;
-    private final String kindDetail;
-    private final Date updatedAt;
+    private String stationChargerId;
+    private String name;
+    private String chargerType;
+    private String address;
+    private Float lat;
+    private Float lng;
+    private String operatorId;
+    private String operatorName;
+    private Integer output;
+    private String kindDetail;
+    private Date updatedAt;
+
     public ChargerDetailDTO(String stationChargerId, String name, String chargerType, String address, Float lat, Float lng, String operatorId, String operatorName, Integer output, String kindDetail, Date updatedAt) {
         this.stationChargerId = stationChargerId;
         this.name = name;
@@ -30,6 +31,10 @@ public class ChargerDetailDTO {
 
     public String getStationChargerId() {
         return stationChargerId;
+    }
+
+    public void setStationChargerId(String stationChargerId) {
+        this.stationChargerId = stationChargerId;
     }
 
     public String getName() {
@@ -71,5 +76,4 @@ public class ChargerDetailDTO {
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
 }
