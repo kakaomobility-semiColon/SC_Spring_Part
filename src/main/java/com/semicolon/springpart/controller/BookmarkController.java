@@ -1,6 +1,6 @@
-package com.semicolon.springpart.Controller;
+package com.semicolon.springpart.controller;
 
-import com.semicolon.springpart.Service.BookmarkService;
+import com.semicolon.springpart.service.BookmarkService;
 import com.semicolon.springpart.entity.BookmarkEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,12 @@
 package com.semicolon.springpart.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
 public class Response<T> {
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timeStamp;
     private int status;
     private String message;

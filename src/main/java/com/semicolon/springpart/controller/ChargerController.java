@@ -1,13 +1,11 @@
-package com.semicolon.springpart.Controller;
+package com.semicolon.springpart.controller;
 
-import com.semicolon.springpart.Service.BookmarkService;
-import com.semicolon.springpart.Service.ChargerService;
+import com.semicolon.springpart.service.BookmarkService;
+import com.semicolon.springpart.service.ChargerService;
 import com.semicolon.springpart.dto.ChargerDetailDTO;
 import com.semicolon.springpart.dto.ChargerMarkerDTO;
 import com.semicolon.springpart.dto.ChargerSearchDTO;
 import com.semicolon.springpart.dto.Response;
-import com.semicolon.springpart.entity.BookmarkEntity;
-import com.semicolon.springpart.entity.ChargerApiEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

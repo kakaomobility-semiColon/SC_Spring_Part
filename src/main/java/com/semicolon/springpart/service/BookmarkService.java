@@ -1,4 +1,4 @@
-package com.semicolon.springpart.Service;
+package com.semicolon.springpart.service;
 
 import com.semicolon.springpart.entity.BookmarkEntity;
 import com.semicolon.springpart.repository.BookmarkRepository;
