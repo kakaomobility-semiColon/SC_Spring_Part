@@ -1,11 +1,9 @@
-package com.semicolon.springpart.Repository;
+package com.semicolon.springpart.repository;
 
 import com.semicolon.springpart.dto.ChargerDetailDTO;
 import com.semicolon.springpart.dto.ChargerMarkerDTO;
 import com.semicolon.springpart.dto.ChargerSearchDTO;
 import com.semicolon.springpart.entity.ChargerApiEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

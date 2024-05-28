@@ -18,6 +18,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+config.properties
 application-key.properties
 application-aws.properties
 .idea
