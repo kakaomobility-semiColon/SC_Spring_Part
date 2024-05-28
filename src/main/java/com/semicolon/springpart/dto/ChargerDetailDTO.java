@@ -170,3 +170,4 @@ public class ChargerDetailDTO {
         return updatedAt;
     }
 }
+
