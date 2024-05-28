@@ -63,4 +63,3 @@ public class ChargerController {
         return ResponseEntity.status(status).body(response);
     }
 }
-
