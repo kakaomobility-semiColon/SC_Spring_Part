@@ -22,3 +22,4 @@ public class SwaggerConfig {
                         .url("https://example.com/docs"));
     }
 }
+
