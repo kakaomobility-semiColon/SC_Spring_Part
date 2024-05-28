@@ -1,13 +1,12 @@
 package com.semicolon.springpart.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Response<T> {
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime timeStamp;
+    private String timeStamp;
     private int status;
     private String message;
     private T result;
@@ -15,7 +14,8 @@ public class Response<T> {
 
     // 성공 시 사용하는 생성자
     public Response(T result) {
-        this.timeStamp = LocalDateTime.now();
+        this.timeStamp = ZonedDateTime.now().withZoneSameInstant(java.time.ZoneId.of("Asia/Seoul"))
+                .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         this.status = HttpStatus.OK.value();
         this.message = "요청이 성공했습니다.";
         this.result = result;
@@ -24,7 +24,8 @@ public class Response<T> {
 
     // 실패 시 사용하는 생성자
     public Response(HttpStatus status, String message) {
-        this.timeStamp = LocalDateTime.now();
+        this.timeStamp = ZonedDateTime.now().withZoneSameInstant(java.time.ZoneId.of("Asia/Seoul"))
+                .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         this.status = status.value();
         this.message = message;
         this.result = null;
@@ -37,11 +38,11 @@ public class Response<T> {
     }
 
     // Getters and Setters
-    public LocalDateTime getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
