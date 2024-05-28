@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChargerSearchDTO {
+    private String stationChargerId;
     private String name;
     private String chargerType;
     private String chargerTypeName;
@@ -13,7 +14,8 @@ public class ChargerSearchDTO {
     private String kindDetail;
     private String kindDetailName;
 
-    public ChargerSearchDTO(String name, String chargerType, String address, String operatorName, Integer output, String kindDetail) {
+    public ChargerSearchDTO(String stationChargerId, String name, String chargerType, String address, String operatorName, Integer output, String kindDetail) {
+        this.stationChargerId = stationChargerId;
         this.name = name;
         this.chargerType = chargerType;
         this.chargerTypeName = mapChargerTypeToName(chargerType);
@@ -98,6 +100,9 @@ public class ChargerSearchDTO {
         kindDetailMap.put("J007", "경기장");
 
         return kindDetailMap.getOrDefault(kindDetail, "알 수 없음");
+    }
+    public String getStationChargerId() {
+        return stationChargerId;
     }
     public String getName() {
         return name;
