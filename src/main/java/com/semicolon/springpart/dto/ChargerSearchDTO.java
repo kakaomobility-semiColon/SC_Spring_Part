@@ -1,5 +1,6 @@
 package com.semicolon.springpart.dto;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +14,9 @@ public class ChargerSearchDTO {
     private Integer output;
     private String kindDetail;
     private String kindDetailName;
+    private Date updatedAt;
 
-    public ChargerSearchDTO(String stationChargerId, String name, String chargerType, String address, String operatorName, Integer output, String kindDetail) {
+    public ChargerSearchDTO(String stationChargerId, String name, String chargerType, String address, String operatorName, Integer output, String kindDetail, Date updatedAt) {
         this.stationChargerId = stationChargerId;
         this.name = name;
         this.chargerType = chargerType;
@@ -24,6 +26,7 @@ public class ChargerSearchDTO {
         this.output = output;
         this.kindDetail = kindDetail;
         this.kindDetailName = mapKindDetailToName(kindDetail);
+        this.updatedAt = updatedAt;
     }
 
     private String mapChargerTypeToName(String chargerType) {
@@ -134,6 +137,9 @@ public class ChargerSearchDTO {
 
     public String getKindDetailName() {
         return kindDetailName;
+    }
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
 
