@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ChargerRepository extends JpaRepository<ChargerApiEntity, Long> {
+public interface ChargerRepository extends JpaRepository<ChargerApiEntity, String> {
 
 
     @Query("SELECT new com.semicolon.springpart.dto.ChargerMarkerDTO(c.name, c.lat, c.lng, c.address,c.operatorName,c.output) FROM ChargerApiEntity c")
