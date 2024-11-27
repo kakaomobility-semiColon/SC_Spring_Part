@@ -1,6 +1,5 @@
 package com.semicolon.springpart.controller;
 
-import com.semicolon.springpart.service.BookmarkService;
 import com.semicolon.springpart.service.ChargerService;
 import com.semicolon.springpart.dto.ChargerDetailDTO;
 import com.semicolon.springpart.dto.ChargerMarkerDTO;
@@ -21,7 +20,7 @@ public class ChargerController {
 
     private final ChargerService chargerService;
 
-    public ChargerController(ChargerService chargerService, BookmarkService bookmarkService) {
+    public ChargerController(ChargerService chargerService) {
         this.chargerService = chargerService;
     }
 
