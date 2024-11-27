@@ -1,11 +1,17 @@
 package com.semicolon.springpart.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "charger")
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본 생성자를 protected로 설정
+@Builder // 빌더 패턴 적용
+@AllArgsConstructor
 public class ChargerApiEntity {
 
     @Id

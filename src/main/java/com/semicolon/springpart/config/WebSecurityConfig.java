@@ -28,10 +28,8 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer configure() {
-        WebSecurityCustomizer webSecurityCustomizer = (web) -> web.ignoring()
-                .requestMatchers(toH2Console())
-                .requestMatchers(new AntPathRequestMatcher("/static/**"));
-        return webSecurityCustomizer;
+        return (web) -> web.ignoring()
+                .requestMatchers("/static/**");
     }
 
 
