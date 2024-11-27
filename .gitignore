@@ -21,6 +21,7 @@ bin/
 config.properties
 application-key.properties
 application-aws.properties
+application.yml
 .idea
 *.iws
 *.iml
