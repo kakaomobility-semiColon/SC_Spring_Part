@@ -45,10 +45,12 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
+                        .permitAll()
                         .defaultSuccessUrl("/charger")
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
+                        .permitAll()
                         .invalidateHttpSession(true)
                 )
                 .csrf(AbstractHttpConfigurer::disable)
